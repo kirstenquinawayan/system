@@ -1,0 +1,14 @@
+.env
+.env.*
+!.env.example
+/config.php
+/config.local.php
+/vendor/
+/database/ocwbs_db.sql
+/uploads/avatars/
+/uploads/receipts/
+/uploads/payments/
+/.cash-receipt-test-id
+*.log
+*.pem
+*.key

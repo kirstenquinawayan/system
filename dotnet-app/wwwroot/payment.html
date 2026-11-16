@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Verify your booking contact, pay in Stripe test mode, or download a booking receipt.">
+  <title>Booking payment | Kwacky-kleen</title>
+  <link rel="stylesheet" href="/payment.css?v=20261116">
+  <script src="/public-site-settings.js?v=20261116" defer></script>
+  <script src="/payment.js" defer></script>
+</head>
+<body>
+  <main class="payment-card">
+    <a class="back-link" href="/">← Back to services</a>
+    <p class="eyebrow"><span data-site-short-name>OCWBS</span> · Booking</p>
+    <h1>Payment and receipt</h1>
+    <p class="intro">Enter the 64-character receipt token from your booking confirmation. Verify the booking mobile number before checkout. Online card checkout is available in test mode only.</p>
+
+    <p id="payment-message" class="message" role="status" aria-live="polite"></p>
+
+    <form id="payment-form">
+      <label for="receipt-token">Receipt token</label>
+      <input id="receipt-token" name="token" autocomplete="off" spellcheck="false"
+             minlength="64" maxlength="64" pattern="[a-f0-9]{64}" required>
+      <button id="send-code-button" type="submit">Send verification code</button>
+    </form>
+
+    <form id="sms-verification-form" hidden>
+      <label for="sms-code">6-digit SMS verification code</label>
+      <input id="sms-code" name="code" inputmode="numeric" autocomplete="one-time-code"
+             minlength="6" maxlength="6" pattern="[0-9]{6}" required>
+      <button id="verify-code-button" type="submit">Verify mobile number</button>
+    </form>
+
+    <form id="checkout-form" hidden>
+      <button id="pay-button" type="submit">Continue to secure checkout</button>
+    </form>
+
+    <nav id="receipt-links" class="receipt-links" aria-label="Booking receipts" hidden>
+      <a id="confirmation-link">Download booking confirmation (PDF)</a>
+      <a id="payment-receipt-link">Download payment receipt (PDF)</a>
+    </nav>
+  </main>
+</body>
+</html>

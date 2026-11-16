@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <title>Customer account | Kwacky-kleen</title>
+  <link rel="stylesheet" href="/assets/css/public-ui.css">
+  <link rel="stylesheet" href="/site.css?v=20261116">
+  <link rel="stylesheet" href="/customer-account.css?v=20261115">
+  <script src="/public-site-settings.js?v=20261116" defer></script>
+  <script src="/customer-api.js?v=20261116" defer></script>
+  <script src="/customer-account.js?v=20261116" defer></script>
+</head>
+<body class="public-site-theme">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="/"><img class="brand-logo" data-site-logo alt="" hidden><span data-site-short-name>Kwacky-kleen &amp; Autocare</span></a>
+    <nav aria-label="Main navigation">
+      <a href="/">Services</a>
+      <a href="/booking.html">Book now</a>
+      <a href="/customer-account.html" aria-current="page">My account</a>
+    </nav>
+  </header>
+  <main id="main-content">
+    <section class="account-intro">
+      <p class="eyebrow">Customer portal</p>
+      <h1>Your account.</h1>
+      <p>Keep track of bookings, updates, and your account security in one place.</p>
+    </section>
+
+    <p id="account-status" class="account-status" role="status" aria-live="polite"></p>
+
+    <section id="signed-out" class="account-grid" aria-label="Sign in or create an account">
+      <form id="login-form" class="account-card">
+        <h2>Sign in</h2>
+        <label>Email address<input name="email" type="email" maxlength="254" autocomplete="email" required></label>
+        <label>Password<input name="password" type="password" maxlength="72" autocomplete="current-password" required></label>
+        <button class="primary-button" type="submit">Sign in</button>
+      </form>
+
+      <form id="register-form" class="account-card">
+        <h2>Create your account</h2>
+        <label>Full name<input name="fullName" maxlength="250" autocomplete="name" required></label>
+        <label>Email address<input name="email" type="email" maxlength="254" autocomplete="email" required></label>
+        <label>Contact number<input name="contact" type="tel" maxlength="32" autocomplete="tel"></label>
+        <label>Password<input name="password" type="password" minlength="12" maxlength="72" autocomplete="new-password" aria-describedby="password-help" required></label>
+        <p id="password-help" class="field-help">Use at least 12 characters; passwords are limited to 72 UTF-8 bytes.</p>
+        <button class="primary-button" type="submit">Create account</button>
+      </form>
+
+      <form id="recovery-form" class="account-card account-card-wide">
+        <h2>Forgot your password?</h2>
+        <p>Enter your account email and we’ll send a secure recovery link if it matches an account.</p>
+        <label>Email address<input name="email" type="email" maxlength="254" autocomplete="email" required></label>
+        <button class="secondary-button" type="submit">Send recovery link</button>
+      </form>
+
+      <form id="sms-recovery-form" class="account-card">
+        <h2>Recover by SMS</h2>
+        <p>Request a one-time reset code using the mobile number on your account.</p>
+        <label>Mobile number<input name="contact" type="tel" inputmode="numeric" pattern="09[0-9]{9}" maxlength="11" autocomplete="tel" required></label>
+        <button class="secondary-button" type="submit">Send SMS code</button>
+      </form>
+
+      <form id="sms-reset-form" class="account-card">
+        <h2>Reset with SMS code</h2>
+        <label>Mobile number<input name="contact" type="tel" inputmode="numeric" pattern="09[0-9]{9}" maxlength="11" autocomplete="tel" required></label>
+        <label>6-digit code<input name="code" type="text" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" autocomplete="one-time-code" required></label>
+        <label>New password<input name="password" type="password" minlength="12" maxlength="72" autocomplete="new-password" required></label>
+        <label>Confirm new password<input name="confirmPassword" type="password" minlength="12" maxlength="72" autocomplete="new-password" required></label>
+        <button class="secondary-button" type="submit">Reset password</button>
+      </form>
+    </section>
+
+    <section id="reset-section" class="account-grid" hidden>
+      <form id="reset-form" class="account-card account-card-wide">
+        <h2>Set a new password</h2>
+        <p>This link can be used once and expires after 30 minutes.</p>
+        <label>New password<input name="password" type="password" minlength="12" maxlength="72" autocomplete="new-password" required></label>
+        <button class="primary-button" type="submit">Update password</button>
+      </form>
+    </section>
+
+    <section id="signed-in" hidden>
+      <div class="account-dashboard-heading">
+        <div>
+          <p class="eyebrow">Welcome back</p>
+          <h2 id="customer-name"></h2>
+          <p id="customer-email" class="field-help"></p>
+        </div>
+        <button id="logout-button" class="secondary-button" type="button">Sign out</button>
+      </div>
+
+      <div class="account-grid account-grid-dashboard">
+        <section class="account-card account-card-wide">
+          <h2>Admin-assisted password reset</h2>
+          <p id="admin-recovery-status" class="field-help">Check or request a password-reset approval from the shop.</p>
+          <form id="admin-recovery-request-form">
+            <button class="secondary-button" type="submit">Request admin approval</button>
+          </form>
+          <form id="admin-recovery-complete-form" class="stack" hidden>
+            <p class="field-help">Your request is approved. Set a new password within 30 minutes.</p>
+            <label>New password<input name="password" type="password" minlength="12" maxlength="72" autocomplete="new-password" required></label>
+            <label>Confirm new password<input name="confirmPassword" type="password" minlength="12" maxlength="72" autocomplete="new-password" required></label>
+            <button class="secondary-button" type="submit">Change password</button>
+          </form>
+        </section>
+
+        <section class="account-card account-card-wide">
+          <div class="section-title-row">
+            <div><h2>Your bookings</h2><p class="field-help">Only bookings made while signed in appear here.</p></div>
+            <a class="secondary-button" href="/booking.html">Book a service</a>
+          </div>
+          <div id="bookings-list" class="account-list"></div>
+        </section>
+
+        <section class="account-card account-card-wide">
+          <div class="section-title-row"><div><h2>Notifications</h2><p class="field-help">Booking status updates from the shop.</p></div></div>
+          <div id="notifications-list" class="account-list"></div>
+        </section>
+
+        <form id="change-password-form" class="account-card account-card-wide">
+          <h2>Change password</h2>
+          <label>Current password<input name="currentPassword" type="password" maxlength="72" autocomplete="current-password" required></label>
+          <label>New password<input name="newPassword" type="password" minlength="12" maxlength="72" autocomplete="new-password" required></label>
+          <button class="secondary-button" type="submit">Change password</button>
+        </form>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="site-footer-main container">
+      <div class="site-footer-brand">
+        <a class="site-footer-logo" href="/"><img data-site-logo alt="" hidden><span data-site-short-name>Kwacky-kleen &amp; Autocare</span></a>
+        <p>Professional car wash and detailing. Browse services and plan your next visit online.</p>
+      </div>
+      <nav class="site-footer-column" aria-label="Footer navigation">
+        <h2>Quick links</h2>
+        <a href="/">Services</a>
+        <a href="/booking.html">Book now</a>
+        <a href="/about.html">About us</a>
+      </nav>
+      <div class="site-footer-column site-footer-contact">
+        <h2>Shop hours</h2>
+        <p>Weekdays: 7:00 AM–11:00 PM</p>
+        <p>Weekends: 7:00 AM–12:00 AM</p>
+        <a class="site-footer-booking" href="/booking.html">Book a visit</a>
+      </div>
+    </div>
+    <div class="site-footer-bottom">
+      <div class="container"><p>© <span data-site-name>Kwacky-kleen</span>. All rights reserved.</p><a href="/about.html">About us</a></div>
+    </div>
+  </footer>
+</body>
+</html>

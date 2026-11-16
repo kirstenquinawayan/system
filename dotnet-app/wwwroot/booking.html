@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Book a Service | Kwacky-kleen</title>
+  <link rel="stylesheet" href="/assets/css/public-ui.css">
+  <link rel="stylesheet" href="/site.css?v=20261116">
+  <link rel="stylesheet" href="/booking.css?v=20261116">
+  <script src="/public-site-settings.js?v=20261116" defer></script>
+</head>
+<body class="public-site-theme booking-page-theme">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="/"><img class="brand-logo" data-site-logo alt="" hidden><span data-site-short-name>Kwacky-kleen &amp; Autocare</span></a>
+    <nav aria-label="Main navigation">
+      <a href="/">Services</a>
+      <a href="/booking.html" aria-current="page">Book now</a>
+      <a href="/customer-account.html">My account</a>
+    </nav>
+  </header>
+  <main id="main-content">
+    <section class="intro booking-intro">
+      <p class="eyebrow">Plan your visit</p>
+      <h1>Book a service.</h1>
+      <p>Choose the service and a time that works for you. It takes about two minutes.</p>
+    </section>
+    <ol id="booking-progress" class="booking-progress" aria-label="Booking steps">
+      <li class="is-current" aria-current="step"><span aria-hidden="true">1</span><strong>Service &amp; time</strong></li>
+      <li><span aria-hidden="true">2</span><strong>Your details</strong></li>
+    </ol>
+    <form id="booking-form" class="booking-card">
+      <div id="booking-error" class="booking-alert" role="alert" tabindex="-1" hidden></div>
+      <section id="appointment-step" class="booking-step">
+        <div class="booking-columns">
+          <section>
+          <h2 tabindex="-1">Appointment</h2>
+          <p id="vehicle-help" class="field-help field-help-wide" role="status" aria-live="polite">Choose the vehicle you'll bring to the appointment.</p>
+          <label>Vehicle type<select id="vehicle-id" name="vehicleId" required aria-describedby="vehicle-help"><option value="">Loading vehicles…</option></select></label>
+          <button id="retry-vehicles" class="text-button" type="button" hidden>Try loading vehicles again</button>
+          <label>Date<input id="schedule" name="schedule" type="date" required></label>
+          <label>Appointment time<select id="schedule-time" name="scheduleTime" required disabled><option value="">Select a date first</option></select></label>
+          <p id="schedule-help" class="field-help field-help-wide" role="status" aria-live="polite">Shop hours: weekdays 7:00 AM–11:00 PM; weekends 7:00 AM–12:00 AM. Up to 2 bookings per hour.</p>
+          <div class="booking-total"><span>Reservation fee (non-refundable)</span><strong>PHP 250.00</strong></div>
+          <div class="booking-total"><span>Total</span><strong id="total-amount">PHP 250.00</strong></div>
+        </section>
+        </div>
+        <section class="service-picker">
+          <div class="service-picker-heading">
+            <div>
+              <h2>Select services</h2>
+              <p id="service-help" class="field-help" role="status" aria-live="polite">Select a vehicle type to see available services and prices.</p>
+            </div>
+            <label class="service-search">
+              <span class="visually-hidden">Search services</span>
+              <input id="service-search" type="search" placeholder="Search services" autocomplete="off" disabled>
+            </label>
+          </div>
+          <button id="retry-services" class="text-button" type="button" hidden>Try loading services again</button>
+          <div id="booking-services">
+            <div id="regular-services" class="booking-service-grid"></div>
+            <div id="promo-services" class="promo-service-groups"></div>
+          </div>
+        </section>
+        <div class="step-actions step-actions-end">
+          <button id="continue-details" class="primary-button" type="button" disabled>Continue to your details</button>
+        </div>
+      </section>
+      <section id="customer-step" class="booking-step" hidden>
+        <h2 tabindex="-1">Your details</h2>
+        <p class="field-help">We’ll use these details to identify your booking. Please check they’re correct.</p>
+        <div class="booking-columns">
+          <div>
+            <label>Full name<input name="clientName" maxlength="250" autocomplete="name" required></label>
+            <label>Contact number<input name="contact" type="tel" inputmode="numeric" pattern="0[0-9]{10}" maxlength="11" placeholder="09xxxxxxxxx" autocomplete="tel" required></label>
+            <label>Plate number<input name="plateNumber" maxlength="8" pattern="([A-Za-z]{3} ?[0-9]{4}|[A-Za-z]{2} ?[0-9]{5}|[0-9]{1,6})" placeholder="AAA 0123" autocapitalize="characters" required></label>
+          </div>
+          <div>
+            <label>Email<input name="email" type="email" maxlength="254" autocomplete="email" required></label>
+            <label>Address<textarea name="address" rows="3" maxlength="2000" autocomplete="street-address" required></textarea></label>
+            <div class="booking-review">
+              <h3>Booking summary</h3>
+              <p id="review-appointment"></p>
+              <ul id="review-services"></ul>
+              <div class="booking-total"><span>Total, including reservation fee</span><strong id="review-total"></strong></div>
+            </div>
+          </div>
+        </div>
+        <div class="step-actions">
+          <button id="back-to-appointment" class="secondary-button" type="button">Back</button>
+          <button id="submit-booking" class="primary-button" type="submit">Confirm booking</button>
+        </div>
+      </section>
+    </form>
+
+    <section id="booking-confirmation" class="booking-card" hidden>
+      <p class="eyebrow">Booking submitted</p>
+      <h1 id="confirmation-title" tabindex="-1">Booking confirmation</h1>
+      <div class="confirmation-grid">
+        <div><strong>Reference</strong><span id="receipt-code"></span></div>
+        <div><strong>Customer</strong><span id="receipt-client"></span></div>
+        <div><strong>Contact</strong><span id="receipt-contact"></span></div>
+        <div><strong>Plate number</strong><span id="receipt-plate"></span></div>
+        <div><strong>Vehicle</strong><span id="receipt-vehicle"></span></div>
+        <div><strong>Schedule</strong><span id="receipt-schedule"></span></div>
+      </div>
+      <h2>Selected services</h2>
+      <ul id="receipt-services"></ul>
+      <div class="booking-total"><span>Services</span><strong id="receipt-subtotal"></strong></div>
+      <div class="booking-total"><span>Reservation fee</span><strong id="receipt-fee"></strong></div>
+      <div class="booking-total"><span>Total</span><strong id="receipt-total"></strong></div>
+      <p class="field-help">Your booking is unpaid. Please pay the full amount at the shop cashier upon arrival.</p>
+      <div class="confirmation-actions">
+        <a id="download-confirmation" class="primary-button" target="_blank" rel="noopener">Download confirmation (PDF)</a>
+        <a id="payment-options" class="secondary-button">Payment options</a>
+        <a class="secondary-button" href="/customer-account.html">My account and notifications</a>
+        <a class="secondary-button" href="/">Back to services</a>
+        <button id="another-booking" class="secondary-button" type="button">Make another booking</button>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="site-footer-main container">
+      <div class="site-footer-brand">
+        <a class="site-footer-logo" href="/"><img data-site-logo alt="" hidden><span data-site-short-name>Kwacky-kleen &amp; Autocare</span></a>
+        <p>Professional car wash and detailing. Browse services and plan your next visit online.</p>
+      </div>
+      <nav class="site-footer-column" aria-label="Footer navigation">
+        <h2>Quick links</h2>
+        <a href="/">Services</a>
+        <a href="/customer-account.html">My account</a>
+        <a href="/about.html">About us</a>
+      </nav>
+      <div class="site-footer-column site-footer-contact">
+        <h2>Shop hours</h2>
+        <p>Weekdays: 7:00 AM–11:00 PM</p>
+        <p>Weekends: 7:00 AM–12:00 AM</p>
+        <a class="site-footer-booking" href="/booking.html">Book a visit</a>
+      </div>
+    </div>
+    <div class="site-footer-bottom">
+      <div class="container"><p>© <span data-site-name>Kwacky-kleen</span>. All rights reserved.</p><a href="/about.html">About us</a></div>
+    </div>
+  </footer>
+  <script src="/booking.js" defer></script>
+</body>
+</html>

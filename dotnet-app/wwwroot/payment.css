@@ -1,0 +1,72 @@
+:root {
+  color-scheme: light;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  color: #172033;
+  background: #f4f7fb;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.payment-card {
+  width: min(100%, 560px);
+  padding: clamp(24px, 6vw, 48px);
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 18px 55px rgb(15 23 42 / 9%);
+}
+
+.back-link { color: #087f91; font-weight: 700; text-decoration: none; }
+.eyebrow { margin: 34px 0 8px; color: #0e7490; font-size: .78rem; font-weight: 750; letter-spacing: .12em; text-transform: uppercase; }
+h1 { margin: 0; font-size: clamp(1.75rem, 6vw, 2.4rem); line-height: 1.15; }
+.intro { margin: 16px 0 24px; color: #64748b; line-height: 1.6; }
+
+label { display: block; margin-bottom: 8px; font-weight: 700; }
+input {
+  width: 100%;
+  min-height: 48px;
+  padding: 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  font: inherit;
+}
+input:focus-visible, button:focus-visible, a:focus-visible {
+  outline: 3px solid #22d3ee;
+  outline-offset: 3px;
+}
+button {
+  width: 100%;
+  min-height: 48px;
+  margin-top: 16px;
+  padding: 12px 18px;
+  border: 0;
+  border-radius: 999px;
+  color: white;
+  background: #0e7490;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+button:hover:not(:disabled) { background: #155e75; }
+button:disabled { cursor: wait; opacity: .7; }
+.message { min-height: 1.5em; margin: 0 0 14px; color: #334155; }
+.message[data-kind="error"] { color: #a32121; }
+.message[data-kind="success"] { color: #0e7490; }
+.receipt-links { display: grid; gap: 12px; margin-top: 24px; }
+.receipt-links[hidden] { display: none; }
+.receipt-links a { color: #087f91; font-weight: 700; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; }
+}

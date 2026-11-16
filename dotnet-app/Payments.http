@@ -1,0 +1,30 @@
+@baseUrl = http://127.0.0.1:5187
+@receiptToken = replace-with-a-booking-receipt-token
+@bookingId = 1
+
+### Create or reuse a Stripe test Checkout session (requires STRIPE_TEST_MODE=true)
+POST {{baseUrl}}/api/public/payments/{{receiptToken}}/checkout
+Accept: application/json
+
+### Download the token-protected booking confirmation
+GET {{baseUrl}}/api/public/receipts/{{receiptToken}}/confirmation.pdf
+
+### Download the token-protected payment receipt after verified payment
+GET {{baseUrl}}/api/public/receipts/{{receiptToken}}/reservation.pdf
+
+### Obtain an admin antiforgery token and cookie before recording cash
+GET {{baseUrl}}/api/admin/csrf
+
+### Record the remaining cash balance at the shop (requires an authenticated admin/staff cookie)
+POST {{baseUrl}}/api/admin/payments/{{bookingId}}/cash
+X-CSRF-TOKEN: replace-with-request-token
+
+### Download a cash receipt (requires an authenticated admin/staff cookie)
+GET {{baseUrl}}/api/admin/receipts/{{bookingId}}/cash.pdf
+
+### Stripe webhook example only: replace payload and signature with a Stripe-signed test event
+POST {{baseUrl}}/api/payments/stripe/webhook
+Content-Type: application/json
+Stripe-Signature: t=replace-with-unix-timestamp,v1=replace-with-hmac-sha256-signature
+
+{}

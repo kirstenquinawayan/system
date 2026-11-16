@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Admin operations</title>
+  <link rel="stylesheet" href="admin-operations.css?v=20261115">
+  <script src="admin-operations.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="topbar">
+    <a class="brand" href="admin.html">OCWBS <span>Operations</span></a>
+    <div class="top-actions">
+      <span id="session-name" class="session-name" aria-live="polite"></span>
+      <a class="button button-quiet" href="admin-password-reset.html">Forgot password</a>
+      <button id="sign-out" class="button button-quiet" type="button" hidden>Sign out</button>
+    </div>
+  </header>
+  <main id="main" class="shell">
+    <div class="heading">
+      <div><p class="eyebrow">Administration</p><h1>Operations</h1>
+        <p class="muted">Manage staff accounts, booking records, payment reviews, reports, and site settings.</p></div>
+      <a class="button button-secondary" href="admin.html">Back to booking dashboard</a>
+    </div>
+    <div id="notice" role="status" aria-live="polite" class="notice" hidden></div>
+    <section id="signed-out" class="card" hidden>
+      <h2>Sign in required</h2><p class="muted">This page is available only to an authenticated administrator or staff member.</p>
+      <a class="button button-primary" href="admin-login.html">Go to admin sign in</a>
+    </section>
+    <div id="operations" hidden>
+      <nav class="tabs" aria-label="Admin operation sections">
+        <button class="tab is-active" data-tab="users" type="button">Users</button>
+        <button class="tab" data-tab="reports" type="button">Reports</button>
+        <button class="tab" data-tab="bookings" type="button">Booking & payments</button>
+        <button class="tab" data-tab="notifications" type="button">Customer decisions</button>
+        <button class="tab" data-tab="settings" type="button">System settings</button>
+      </nav>
+
+      <section id="panel-users" class="panel">
+        <div class="columns">
+          <form id="user-form" class="card stack">
+            <h2 id="user-form-title">Create user</h2>
+            <input id="user-id" type="hidden" value="0">
+            <label>First name<input id="first-name" maxlength="250" required autocomplete="given-name"></label>
+            <label>Last name<input id="last-name" maxlength="250" required autocomplete="family-name"></label>
+            <label>Username<input id="username" maxlength="250" required autocomplete="username"></label>
+            <label>Recovery email<input id="user-email" type="email" maxlength="254" required autocomplete="email"></label>
+            <label>Role<select id="user-role" required><option value="staff">Staff</option><option value="admin">Administrator</option></select></label>
+            <label>Password <span id="password-hint" class="muted">(minimum 12 characters; leave blank when editing to keep current)</span>
+              <input id="user-password" type="password" minlength="12" maxlength="72" autocomplete="new-password"></label>
+            <div class="form-actions"><button class="button button-primary" type="submit">Save user</button>
+              <button id="user-reset" class="button button-secondary" type="button">Clear</button></div>
+          </form>
+          <section class="card">
+            <div class="section-title"><h2>Admin and staff accounts</h2><button id="refresh-users" class="button button-secondary" type="button">Refresh</button></div>
+            <div id="users-list" class="data-list" aria-live="polite"></div>
+          </section>
+        </div>
+      </section>
+
+      <section id="panel-reports" class="panel" hidden>
+        <form id="report-form" class="card filters">
+          <label>Date range uses<select id="report-type"><option value="appointment">Appointment date</option><option value="booking">Booking date</option></select></label>
+          <label>From<input id="report-start" type="date" required></label>
+          <label>To<input id="report-end" type="date" required></label>
+          <button class="button button-primary" type="submit">Run report</button>
+          <button id="export-report" class="button button-secondary" type="button">Export CSV</button>
+        </form>
+        <div id="report-summary" class="stat-grid" aria-live="polite"></div>
+        <section class="card"><h2>Report details</h2><div id="report-details" class="data-list"></div></section>
+      </section>
+
+      <section id="panel-bookings" class="panel" hidden>
+        <form id="booking-search" class="card filters">
+          <label>Booking ID<input id="booking-id" type="number" min="1" step="1" required placeholder="Enter booking ID"></label>
+          <button class="button button-primary" type="submit">Load booking</button>
+          <p class="muted">Find archived records by ID. Payment and status changes are limited to active bookings.</p>
+        </form>
+        <section id="booking-detail" class="card" hidden></section>
+      </section>
+
+      <section id="panel-notifications" class="panel" hidden>
+        <section class="card"><div class="section-title"><div><h2>Password recovery approvals</h2><p class="muted">Approvals expire after 30 minutes.</p></div>
+          <button id="refresh-queue" class="button button-secondary" type="button">Refresh queues</button></div>
+          <div id="recovery-queue" class="data-list"></div>
+        </section>
+        <section class="card"><h2>Customer booking decisions</h2><p class="muted">Approve pending requests or cancel them; customers receive an in-site notification.</p>
+          <div id="customer-bookings" class="data-list"></div>
+        </section>
+      </section>
+
+      <section id="panel-settings" class="panel" hidden>
+        <form id="settings-form" class="card stack">
+          <h2>Public site information</h2>
+          <label>Site name<input id="site-name" maxlength="250" required></label>
+          <label>Short name<input id="site-short-name" maxlength="100" required></label>
+          <label>About content <span class="muted">Plain text only; up to 12,000 characters.</span>
+            <textarea id="site-about" rows="7" maxlength="12000"></textarea></label>
+          <button class="button button-primary" type="submit">Save settings</button>
+        </form>
+        <section class="card">
+          <h2>Logo, cover, and banner images</h2>
+          <p class="muted">PNG/JPEG only, up to 5 MB each. Uploads use generated names and are stored under the existing uploads directory.</p>
+          <div class="image-uploads">
+            <form class="upload-form stack" data-kind="logo"><label>Replace logo<input type="file" accept="image/png,image/jpeg" required></label><button class="button button-secondary">Upload logo</button></form>
+            <form class="upload-form stack" data-kind="cover"><label>Replace cover<input type="file" accept="image/png,image/jpeg" required></label><button class="button button-secondary">Upload cover</button></form>
+            <form class="upload-form stack" data-kind="banner"><label>Add banner images<input type="file" accept="image/png,image/jpeg" multiple required></label><button class="button button-secondary">Upload banners</button></form>
+          </div>
+          <div id="image-list" class="image-list" aria-live="polite"></div>
+        </section>
+      </section>
+    </div>
+  </main>
+  <footer class="footer">Use payment review actions only after verifying the submitted transfer in your payment provider.</footer>
+</body>
+</html>

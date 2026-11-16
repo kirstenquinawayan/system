@@ -1,0 +1,52 @@
+[hidden] { display: none !important; }
+.account-intro { padding: clamp(3rem, 7vw, 5rem) 0 1.5rem; }
+.account-intro h1 { font-size: clamp(2.4rem, 6vw, 4rem); }
+.account-intro > p:last-child { max-width: 650px; color: var(--muted); font-size: 1.08rem; }
+.account-status { min-height: 1.5rem; margin: .25rem 0 1rem; color: var(--accent-strong); font-weight: 700; }
+.account-status[data-error="true"] { color: #b42318; }
+.account-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-bottom: 3rem; }
+.account-grid-dashboard { grid-template-columns: 1fr; }
+.account-card { display: flex; flex-direction: column; align-items: stretch; gap: .85rem; padding: clamp(1.1rem, 3vw, 1.6rem); border: 1px solid var(--line); border-radius: var(--radius-card); background: var(--surface); box-shadow: var(--shadow-card); }
+.account-card-wide { grid-column: 1 / -1; }
+.account-card h2 { margin: 0; font-size: 1.4rem; letter-spacing: -.025em; }
+.account-card > p { margin: 0; color: var(--muted); }
+.account-card label { display: grid; gap: .35rem; font-weight: 700; }
+.account-card input { width: 100%; min-height: 2.9rem; padding: .7rem .8rem; border: 1px solid #cbd5e1; border-radius: .55rem; background: white; }
+.account-card input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px #0e74901c; }
+.account-card .field-help { margin: -.55rem 0 0; color: var(--muted); font-size: .9rem; }
+.account-card button, .account-dashboard-heading button, .section-title-row > a { align-self: flex-start; min-height: 2.7rem; padding: .65rem 1rem; border: 0; border-radius: 999px; background: var(--accent); color: #fff; font-weight: 800; }
+.account-card button:hover, .account-dashboard-heading button:hover, .section-title-row > a:hover { background: var(--accent-strong); }
+.account-card .secondary-button, .account-dashboard-heading .secondary-button, .section-title-row .secondary-button { background: #e2f2f5; color: #07576b; }
+.account-card .secondary-button:hover, .account-dashboard-heading .secondary-button:hover, .section-title-row .secondary-button:hover { background: #c9e8ee; }
+.account-dashboard-heading { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.25rem 0; }
+.account-dashboard-heading h2 { margin: .2rem 0; font-size: clamp(1.7rem, 4vw, 2.3rem); }
+.account-dashboard-heading .eyebrow { margin: 0; }
+.account-dashboard-heading .field-help { margin: 0; }
+.section-title-row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.section-title-row .field-help { margin: .2rem 0 0; color: var(--muted); }
+.account-list { display: grid; gap: .75rem; }
+.account-list-item { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: start; gap: .75rem; padding: 1rem; border: 1px solid var(--line); border-radius: .8rem; background: #fbfdff; }
+.account-list-item h3 { margin: 0 0 .25rem; font-size: 1.05rem; }
+.account-list-item p { margin: .2rem 0; color: var(--muted); }
+.account-list-item .item-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: .45rem; }
+.account-list-item .item-actions button { min-height: 2.4rem; padding: .45rem .75rem; font-size: .9rem; }
+.booking-detail { grid-column: 1 / -1; padding-top: .75rem; border-top: 1px solid var(--line); }
+.booking-detail ul { margin: .35rem 0; padding-left: 1.25rem; }
+.empty-account-list { padding: 1rem; border: 1px dashed #cbd5e1; border-radius: .8rem; color: var(--muted); text-align: center; }
+.notification-unread { border-left: 4px solid var(--accent); }
+.is-loading { opacity: .7; }
+
+@media (max-width: 700px) {
+  .account-grid { grid-template-columns: 1fr; }
+  .account-card-wide { grid-column: auto; }
+  .account-dashboard-heading, .section-title-row { align-items: flex-start; }
+  .account-list-item { grid-template-columns: 1fr; }
+  .account-list-item .item-actions { justify-content: flex-start; }
+}
+
+@media (max-width: 480px) {
+  .site-header { align-items: flex-start; flex-direction: column; gap: .7rem; }
+  .site-header nav { gap: 1rem; flex-wrap: wrap; }
+  .account-dashboard-heading { flex-direction: column; }
+  .section-title-row { flex-direction: column; }
+}

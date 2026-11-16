@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Online Car Wash Booking System — Defense Presentation</title>
+  <style>
+    :root { color-scheme: light; --navy: #12304a; --blue: #1687e8; --ink: #243447; --muted: #5b6b7a; --pale: #edf5fc; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #dbe4ec; color: var(--ink); font: 18px/1.45 "Segoe UI", Arial, sans-serif; }
+    .toolbar { position: sticky; top: 0; z-index: 2; display: flex; justify-content: space-between; align-items: center; padding: 12px 24px; background: var(--navy); color: white; }
+    .toolbar button { border: 0; border-radius: 5px; padding: 9px 16px; background: white; color: var(--navy); font-weight: 700; cursor: pointer; }
+    .slide { position: relative; display: flex; flex-direction: column; justify-content: center; width: min(100% - 48px, 1200px); min-height: min(675px, calc((100vw - 48px) * .5625)); margin: 28px auto; padding: 64px 76px; overflow: hidden; background: white; box-shadow: 0 8px 28px #18334a22; page-break-after: always; }
+    .slide::before { position: absolute; inset: 0 auto 0 0; width: 12px; background: var(--blue); content: ""; }
+    .slide h1, .slide h2 { margin: 0 0 22px; color: var(--navy); line-height: 1.1; }
+    .slide h1 { font-size: clamp(42px, 6vw, 76px); }
+    .slide h2 { font-size: clamp(34px, 4vw, 52px); }
+    .eyebrow { margin: 0 0 18px; color: var(--blue); font-size: 15px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+    .subtitle { max-width: 850px; color: var(--muted); font-size: 26px; }
+    ul { margin: 0; padding-left: 28px; }
+    li { margin: 13px 0; }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+    .card { padding: 20px 22px; border: 1px solid #d7e3ee; border-radius: 10px; background: var(--pale); }
+    .card h3 { margin: 0 0 8px; color: var(--navy); font-size: 22px; }
+    .card p { margin: 0; }
+    .flow { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px; margin: 24px 0; }
+    .flow span { padding: 14px 18px; border-radius: 8px; background: var(--pale); color: var(--navy); font-weight: 700; text-align: center; }
+    .flow b { color: var(--blue); font-size: 26px; }
+    .callout { margin-top: 22px; padding: 16px 20px; border-left: 5px solid var(--blue); background: var(--pale); }
+    .placeholder { color: #8a4b00; font-weight: 700; }
+    .small { color: var(--muted); font-size: 15px; }
+    .footer { position: absolute; right: 28px; bottom: 20px; left: 40px; display: flex; justify-content: space-between; color: #738292; font-size: 13px; }
+    @media (max-width: 700px) {
+      .slide { width: calc(100% - 20px); min-height: 620px; margin: 12px auto; padding: 38px 30px; }
+      .grid { grid-template-columns: 1fr; }
+      .toolbar { padding: 10px 14px; }
+    }
+    @media print {
+      @page { size: 13.333in 7.5in; margin: 0; }
+      body { background: white; font-size: 16pt; }
+      .toolbar { display: none; }
+      .slide { width: 13.333in; height: 7.5in; min-height: 0; margin: 0; padding: .7in .85in; box-shadow: none; break-after: page; }
+      .slide:last-child { break-after: auto; }
+    }
+  </style>
+</head>
+<body>
+  <header class="toolbar">
+    <span>Defense presentation template · 9 slides · use Print to save as PDF</span>
+    <button type="button" onclick="window.print()">Print / Save as PDF</button>
+  </header>
+
+  <section class="slide">
+    <p class="eyebrow">Project Defense</p>
+    <h1>Online Car Wash<br>Booking System</h1>
+    <p class="subtitle">A web-based system for service selection, appointment booking, booking management, manual transfer references, and in-shop cash payments.</p>
+    <div class="callout">
+      <div><span class="placeholder">[Student / Group Name]</span></div>
+      <div><span class="placeholder">[School · Program · Adviser · Defense Date]</span></div>
+    </div>
+    <div class="footer"><span>OCWBS · PHP · MySQL/MariaDB</span><span>01 / 09</span></div>
+  </section>
+
+  <section class="slide">
+    <p class="eyebrow">01 · Purpose</p>
+    <h2>Project Objectives</h2>
+    <div class="grid">
+      <article class="card"><h3>Online booking</h3><p>Let customers choose a vehicle, services, and an available appointment slot.</p></article>
+      <article class="card"><h3>Consistent pricing</h3><p>Calculate service prices on the server from the selected vehicle and active price list.</p></article>
+      <article class="card"><h3>Booking operations</h3><p>Give authorized staff tools to review bookings and update service progress.</p></article>
+      <article class="card"><h3>Payment workflow</h3><p>Submitting a GCash/Maya transfer reference marks the booking as paid; customers may also select Cashier to pay at the shop.</p></article>
+    </div>
+    <p class="small">Replace or align these objectives with the objectives approved in your research manuscript.</p>
+    <div class="footer"><span>Project objectives</span><span>02 / 09</span></div>
+  </section>
+
+  <section class="slide">
+    <p class="eyebrow">02 · Scope</p>
+    <h2>Scope and Limitations</h2>
+    <div class="grid">
+      <article class="card">
+        <h3>Included</h3>
+        <ul>
+          <li>Vehicle-based services and prices</li>
+          <li>Appointment availability and booking-capacity checks</li>
+          <li>Staff booking and payment management</li>
+          <li>Manual GCash/Maya transfer reference submission; no automatic gateway or debit-card processing</li>
+          <li>Date-filtered reports, CSV export, and PDF documents</li>
+        </ul>
+      </article>
+      <article class="card">
+        <h3>Not included</h3>
+        <ul>
+          <li>Payment status updates after the customer closes the confirmation page (requires a public HTTPS webhook)</li>
+          <li>Automatic email or SMS notifications</li>
+          <li>Automatic confirmation of in-shop cash received</li>
+          <li>Multi-branch or inventory management</li>
+        </ul>
+      </article>
+    </div>
+    <div class="footer"><span>Scope is limited to the implemented local system</span><span>03 / 09</span></div>
+  </section>
+
+  <section class="slide">
+    <p class="eyebrow">03 · Process</p>
+    <h2>System Workflow</h2>
+    <div class="flow">
+      <span>Choose vehicle<br>& services</span><b>→</b>
+      <span>Select an<br>available slot</span><b>→</b>
+      <span>Validate &amp; save<br>booking</span><b>→</b>
+      <span>Choose demo<br>fee or balance</span>
+    </div>
+    <div class="flow">
+      <span>Record demo<br>payment or cash</span><b>→</b>
+      <span>Display demo<br>status or collect cash</span><b>→</b>
+      <span>Start &amp; finish<br>service</span><b>→</b>
+      <span>Receipt &amp;<br>reports</span>
+    </div>
+    <div class="callout">Business rules: Monday–Friday, 7:00 AM–11:00 PM; Saturday–Sunday, 7:00 AM–12:00 AM; appointment slots every hour from 7:00 AM; up to two active bookings per slot; PHP 250 reservation fee included in the total. Submitting a GCash/Maya transfer reference marks the booking as paid. Cash remains an in-shop option.</div>
+    <div class="footer"><span>Appointment times use the configured Asia/Manila timezone</span><span>04 / 09</span></div>
+  </section>
+
+  <section class="slide">
+    <p class="eyebrow">04 · Design</p>
+    <h2>Application Architecture</h2>
+    <div class="flow">
+      <span>Customer / Staff<br>Web Browser</span><b>→</b>
+      <span>PHP Application<br>Validation · Workflow<br>Reports · PDF</span><b>→</b>
+      <span>MySQL / MariaDB<br>Bookings · Services<br>Prices · Users</span>
+    </div>
+    <ul>
+      <li>Prepared statements are used in the booking, lookup, payment, and report paths.</li>
+      <li>The server recalculates prices; it does not trust the amount submitted by the browser.</li>
+      <li>Staff-only actions require an authenticated staff/admin session.</li>
+    </ul>
+    <div class="footer"><span>Local deployment example: Apache + PHP + MariaDB (XAMPP)</span><span>05 / 09</span></div>
+  </section>
+
+  <section class="slide">
+    <p class="eyebrow">05 · Data</p>
+    <h2>Core Database Relationships</h2>
+    <div class="grid">
+      <article class="card"><h3>booking_list</h3><p>Booking details, appointment status, reservation-fee history, and recorded payment method.</p></article>
+      <article class="card"><h3>booking_online_payments</h3><p>Submitted GCash/Maya transfer amount, transaction reference, paid status, and any historical staff reviewer.</p></article>
+      <article class="card"><h3>booking_services</h3><p>Services and the prices saved for each booking.</p></article>
+      <article class="card"><h3>service_list</h3><p>Available service names and active/inactive status.</p></article>
+      <article class="card"><h3>price_list</h3><p>Price for each service and vehicle-type combination.</p></article>
+      <article class="card"><h3>vehicle_list</h3><p>Vehicle types available for customer selection.</p></article>
+      <article class="card"><h3>users</h3><p>Staff/admin accounts; in-shop cash payments retain the staff account that recorded payment.</p></article>
+    </div>
+    <div class="footer"><span>See DEFENSE_GUIDE.md for the ER diagram</span><span>06 / 09</span></div>
+  </section>
+
+  <section class="slide">
+    <p class="eyebrow">06 · Implemented Features</p>
+    <h2>What the System Demonstrates</h2>
+    <ul>
+      <li>Server-side validation of contact details, weekday/weekend appointment hours, and hourly intervals from opening.</li>
+      <li>Appointment-slot capacity checks, including concurrent booking protection and cancelled-slot release.</li>
+      <li>Booking confirmation PDF and automatic paid-booking queue; services move from In Progress to Completed automatically.</li>
+      <li>Manual GCash/Maya transfer reference submission with automatic paid status, and in-shop cash payment.</li>
+      <li>Booking-date and appointment-date reports with CSV export and print view.</li>
+    </ul>
+    <div class="callout"><strong>Payment:</strong> the PHP 250 reservation fee is part of the total. Submitting a transfer reference marks the booking as paid without confirming the actual funds. Staff should reconcile transfers in the merchant account. No automatic gateway, QR, or debit-card processing is configured.</div>
+    <div class="footer"><span>Demonstrate using synthetic/test customer data</span><span>07 / 09</span></div>
+  </section>
+
+  <section class="slide">
+    <p class="eyebrow">07 · Verification</p>
+    <h2>Functional Test Results</h2>
+    <div class="grid">
+      <article class="card"><h3>Retest after recent changes</h3><p>Verify the PHP 250 fee, confirmation PDF, automatically paid transfer references, status progression, cash receipt, reports, CSV export, and removal of the public booking lookup.</p></article>
+      <article class="card"><h3>Still prepare for defense day</h3><p>Capture screenshots from the final demo setup. Run the actual browser print dialog. If required by the panel, complete the approved user-evaluation questionnaire and report only its real results.</p></article>
+    </div>
+    <p class="small">Earlier checks predate the latest booking/payment changes. Retest the updated flow; local checks are not a substitute for evaluation with real users or panel-approved acceptance criteria.</p>
+    <div class="footer"><span>Detailed scenarios and results are in DEFENSE_GUIDE.md</span><span>08 / 09</span></div>
+  </section>
+
+  <section class="slide">
+    <p class="eyebrow">08 · Demonstration</p>
+    <h2>Demo Sequence &amp; Q&amp;A</h2>
+    <ol>
+      <li>Customer selects a vehicle, services, and an open appointment slot.</li>
+      <li>Submit a test booking and show the reference and confirmation PDF.</li>
+      <li>Show the GCash/Maya transfer number and submit a reference to mark the booking paid; or show the in-shop cash alternative.</li>
+      <li>As staff, confirm the booking, record a cash payment if applicable, and show the payment receipt.</li>
+      <li>Show booking-date versus appointment-date reports and export CSV.</li>
+    </ol>
+    <div class="callout">
+      <div class="placeholder">[Add school-approved user-evaluation results, if required]</div>
+      <div class="placeholder">[Add actual study limitations and recommendations]</div>
+    </div>
+    <p class="subtitle">Thank you. Questions?</p>
+    <div class="footer"><span>Replace placeholders before presenting</span><span>09 / 09</span></div>
+  </section>
+</body>
+</html>

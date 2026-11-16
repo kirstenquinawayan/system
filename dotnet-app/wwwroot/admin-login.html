@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Staff sign in | Kwacky-kleen</title>
+  <link rel="stylesheet" href="/admin.css?v=20261115">
+</head>
+<body class="login-page">
+  <a class="skip-link" href="#login-form">Skip to sign in</a>
+  <main class="login-card">
+    <a class="brand" href="/">Kwacky-kleen <span>&amp; Autocare</span></a>
+    <p class="eyebrow">Administration</p>
+    <h1>Welcome back.</h1>
+    <p class="muted">Sign in with your administrator or staff account.</p>
+    <div id="login-error" class="notice notice-error" role="alert" hidden></div>
+    <form id="login-form">
+      <label for="username">Username</label>
+      <input id="username" name="username" autocomplete="username" required maxlength="250">
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password" autocomplete="current-password" required>
+      <button class="button button-primary button-wide" type="submit">Sign in</button>
+    </form>
+    <a class="back-link" href="/admin-password-reset.html">Forgot your password?</a>
+    <a class="back-link" href="/">Back to services</a>
+  </main>
+  <script src="/admin-login.js" defer></script>
+</body>
+</html>
